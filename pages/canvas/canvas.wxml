@@ -1,0 +1,29 @@
+<!--pages/taskCardPost/taskCardPost.wxml-->
+<!-- <text>pages/taskCardPost/taskCardPost.wxml</text> -->
+<view>
+  <image src="{{cardImgSrc}}" class='bgImgNew'></image> 
+  
+  <!-- 切换卡 -->
+<view class='invite-modle'>
+  <scroll-view scroll-x="true" class="poster-mod" scroll-left="{{scrollLeft}}">
+    <block wx:for="{{cardArr}}" wx:key="key" wx:for-index="key" wx:for-item="v">
+      <view class="poster-item {{currentTab==key?'cur':''}}"  >
+        <image class='img' mode="widthFix" data-current="{{key}}"  src='{{v.img}}' data-id="{{v.id}}" data-src="{{v.img}}" 
+        bindtap="swichNav" >
+        </image>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+
+<view class='posterBtn' bindtap='formSubmit'>生成</view>
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <image class='closeThis' src='../../images/delete.png' bindtap='closeThisPostBtn'></image>
+    <image src="{{imagePath}}" class='shengcheng'></image>
+    <button class='baocun' bindtap='baocun'>保存相册，分享到朋友圈</button>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+  <view class="canvas-box">
+    <canvas  style="width: 375px;height: 667px;position:fixed;top:9999px" canvas-id="mycanvas"/>
+  </view>  
+</view>
