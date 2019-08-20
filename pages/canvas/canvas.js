@@ -93,7 +93,7 @@ Page({
   // 设置上部的图片 /images/gobg.png
   context.fillRect(0, 0, 375, 667)
   var path = that.data.cardImgSrc;
-  var path1 = that.data.userInfo['avatarUrl']; // that.data.cardCode 用户二维码
+  var path1 = that.data.cardCode; // that.data.userInfo['avatarUrl'] 用户二维码
   //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
   //不知道是什么原因，手机环境能正常显示   //绘制二维码touxiang
   context.drawImage(path, 48, 20, 280, 460);
