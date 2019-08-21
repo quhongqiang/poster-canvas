@@ -8,7 +8,8 @@ Page({
     cardCode: "../../images/ewm.png",   //二维码
     taskCouponId:'',
     employeeId:'',
-    cardImgSrc: '',  //存储卡片图
+    currentTab: 0,
+    cardImgSrc: '',  // 背景图
     cardArr: [{
       id: '01',
       img: '../../images/card-tp01.jpg'
@@ -47,11 +48,13 @@ Page({
       })
     })
   },
+  onShow: function () {
+    this.shakeFun()
+  },
   //卡片默认显示第一张
   defaultFirstShow() {
     let that = this,
-      cardImgSrc = that.data.cardImgSrc,
-      defaultCardImgSrc = that.data.cardArr[0].img;
+    defaultCardImgSrc = that.data.cardArr[0].img;
     that.setData({
       cardImgSrc: defaultCardImgSrc
     })
@@ -60,7 +63,7 @@ Page({
     var that = this,
       cur = e.target.dataset.current,
       src = e.target.dataset.src;
-    if (that.data.currentTaB == cur) {
+    if (that.data.currentTab == cur) {
       return false;
     } else {
       that.setData({
@@ -70,123 +73,145 @@ Page({
     that.setData({
       cardImgSrc: src
     })
-    that.checkCor();
   },
-  //判断当前滚动超过一屏时
-  checkCor(e) {
-    var that = this;
-    if (that.data.currentTab > 2) {
-      that.setData({
-        scrollLeft: 300
-      })
-    } else {
-      that.setData({
-        scrollLeft: 0
-      })
-    }
-  },
+
  //将canvas转换为图片保存到本地，然后将图片路径传给image图片的src
- createNewImg: function () {
-  var that = this;
-  var context = wx.createCanvasContext('mycanvas');
-  context.setFillStyle("#ffffff")   //填充整体的色调#697fde  ffe200
-  // 设置上部的图片 /images/gobg.png
-  context.fillRect(0, 0, 375, 667)
-  var path = that.data.cardImgSrc;
-  var path1 = that.data.cardCode; // that.data.userInfo['avatarUrl'] 用户二维码
-  //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
-  //不知道是什么原因，手机环境能正常显示   //绘制二维码touxiang
-  context.drawImage(path, 48, 20, 280, 460);
-  
-  context.drawImage(path1, 136, 520, 100, 100);
-  
-  //绘制领券标语
-  context.setFontSize(17);
-  context.setFillStyle('#333333');
-  context.setTextAlign('center');
-  context.fillText(that.data.userInfo['nickName'] + "邀请你进入海贼的世界", 185, 510);
-  context.stroke();
+  createNewImg: function () {
+    var that = this;
+    var context = wx.createCanvasContext('mycanvas');
+    context.setFillStyle("#ffffff")   //填充整体的色调#697fde  ffe200
+    // 设置上部的图片 /images/gobg.png
+    context.fillRect(0, 0, 375, 667)
+    var path = that.data.cardImgSrc;
+    var path1 = that.data.cardCode; // that.data.userInfo['avatarUrl'] 用户二维码
+    //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
+    //不知道是什么原因，手机环境能正常显示   //绘制二维码touxiang
+    context.drawImage(path, 48, 20, 280, 460);
+    
+    context.drawImage(path1, 136, 520, 100, 100);
+    
+    //绘制领券标语
+    context.setFontSize(17);
+    context.setFillStyle('#333333');
+    context.setTextAlign('center');
+    context.fillText(that.data.userInfo['nickName'] + "邀请你进入海贼的世界", 185, 510);
+    context.stroke();
 
-  //绘制领码提醒
-  context.setFontSize(14);
-  context.setFillStyle('#333333');
-  context.setTextAlign('center');
-  context.fillText('长按识别二维码', 185, 650);
-  context.stroke();
+    //绘制领码提醒
+    context.setFontSize(14);
+    context.setFillStyle('#333333');
+    context.setTextAlign('center');
+    context.fillText('长按识别二维码', 185, 650);
+    context.stroke();
 
-  context.draw();
-  //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
-  setTimeout(function () {
-    wx.canvasToTempFilePath({
-      canvasId: 'mycanvas',
-      success: function (res) {
-        var tempFilePath = res.tempFilePath;
-        that.setData({
-          imagePath: tempFilePath,
-          canvasHidden: true
-        });
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    });
-  }, 200);
-},
-//点击保存到相册
-baocun: function () {
-  var that = this
-  wx.saveImageToPhotosAlbum({
-    filePath: that.data.imagePath,
-    success(res) {
-      wx.showModal({
-        content: '图片已保存到相册，赶紧晒一下吧~',
-        showCancel: false,
-        confirmText: '好的',
-        confirmColor: '#333',
+    context.draw();
+    //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
+    setTimeout(function () {
+      wx.canvasToTempFilePath({
+        canvasId: 'mycanvas',
         success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-            /* 该隐藏的隐藏 */
-            that.setData({
-              maskHidden: false
+          var tempFilePath = res.tempFilePath;
+          that.setData({
+            imagePath: tempFilePath,
+            canvasHidden: true
+          });
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
+    }, 200);
+  },
+  //点击保存到相册
+  save: function () {
+    var that = this
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.imagePath,
+      success(res) {
+        wx.showModal({
+          content: '图片已保存到相册，赶紧晒一下吧~',
+          showCancel: false,
+          confirmText: '好的',
+          confirmColor: '#333',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定');
+              /* 该隐藏的隐藏 */
+              that.setData({
+                maskHidden: false
+              })
+            }
+          }, fail: function (res) {
+            console.log(11111)
+          }
+        })
+      }
+    })
+  },
+  // 选取本地图片或者拍照图片
+  getImage: function () {
+    var _this = this;
+    wx.chooseImage({
+      count: 1, // 默认9  
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success: function (response) {
+            _this.setData({
+              cardImgSrc: res.tempFilePaths[0],
+              currentTab: 99
             })
           }
-        }, fail: function (res) {
-          console.log(11111)
-        }
-      })
-    }
-  })
-},
-//点击生成
-formSubmit: function (e) {
-  var that = this;
-  this.setData({
-    maskHidden: false
-  });
-  wx.showToast({
-    title: '生成中...',
-    icon: 'loading',
-    duration: 1000
-  });
-  setTimeout(function () {
-    wx.hideToast()
-    that.createNewImg();
-    wx.vibrateLong();
-    that.setData({
-      maskHidden: true
+        })
+      }
+    })
+  },
+
+  //点击生成
+  formSubmit: function (e) {
+    var that = this;
+    this.setData({
+      maskHidden: false
     });
-  }, 1000)
-},
+    wx.showToast({
+      title: '生成中...',
+      icon: 'loading',
+      duration: 1000
+    });
+    setTimeout(function () {
+      wx.hideToast()
+      that.createNewImg();
+      wx.vibrateLong();
+      that.setData({
+        maskHidden: true
+      });
+    }, 1000)
+  },
 
-// 点击关闭生成的海报
-closeThisPostBtn(){
-  console.log('关闭海报');
-  this.setData({
-    maskHidden: false
-  });
-},
-
+  // 点击关闭生成的海报
+  closeThisPostBtn(){
+    console.log('关闭海报');
+    this.setData({
+      maskHidden: false
+    });
+  },
+   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+    return {
+      title: "快来扫这个码吧",
+      success: function (res) {
+        console.log(res, "转发成功")
+      },
+      fail: function (res) {
+        console.log(res, "转发失败")
+      }
+    }
+  },
   
   shakeFun() { // 摇一摇方法封装
     let _this = this;
@@ -200,11 +225,11 @@ closeThisPostBtn(){
       console.log(res)  //小程序api 加速度计
       if (numX < res.x && numY < res.y) {  //个人看法，一次正数算摇一次，还有更复杂的
         positivenum++
-        setTimeout(() => { positivenum = 0 }, 2000) //计时两秒内没有摇到指定次数，重新计算
+        setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
       }
       if (numZ < res.z || numY < res.y) { //可以上下摇，上面的是左右摇
         positivenum++
-        setTimeout(() => { positivenum = 0 }, 2000) //计时两秒内没有摇到指定次数，重新计算
+        setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
       }
       if (positivenum == 2 && stsw) { //是否摇了指定的次数，执行成功后的操作
         stsw = false

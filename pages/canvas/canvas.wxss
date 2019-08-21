@@ -81,18 +81,28 @@ button[class="btn"]::after {
 .m_l{
   margin-left: 180rpx;
 }
-.zfbtn{
-  display: inline-block;
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-  background: transparent;
-  outline: none;
-  font-size: 26rpx;
-  line-height: 120rpx;
-  border:1px solid rgb(240, 138, 127);
-  /* border: 0; */
+
+.zfbtn, .save{
+  display: block;
+  width: 218rpx;
+	height: 78rpx;
+	border-radius: 20rpx;
+	border: solid 1px #647adb;
   padding: 0;
+  margin: 0 auto;
+  line-height: 78rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 50rpx;
+  background-color: #ffffff;
+  color: #647adb;
+  font-size: 28rpx;
+}
+.save{
+  left: 10%;
+}
+.zfbtn {
+  right: 10%;
 }
 .invite-modle {
   width: 100%;
@@ -119,7 +129,7 @@ button[class="btn"]::after {
   border: 1.5px solid transparent;
   display: inline-block;
   overflow: hidden;
-  margin-right: 35rpx;
+  margin: 0 50rpx 0 20rpx;
 }
 .poster-item.cur {
   border-color: #e94579;
@@ -159,24 +169,23 @@ button[class="btn"]::after {
   margin: auto;
   z-index: 100;
 }
-.baocun{
-  display: block;
-  width: 418rpx;
-	height: 78rpx;
-	border-radius: 20rpx;
-	border: solid 1px #647adb;
-  padding: 0;
-  margin: 0 auto;
-  line-height: 78rpx;
-  text-align: center;
-  position: fixed;
-  bottom: 50rpx;
-  left: 23%;
-  background-color: #ffffff;
-  color: #647adb;
-  font-size: 28rpx;
-}
 
+.album {
+  width: 100rpx;
+  height:100rpx;
+  background-color:orange;
+  border-radius: 50%;
+  font-family:MicrosoftYaHei;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  text-align: center;
+  position:fixed;
+  bottom: 300rpx;
+  left: 20rpx;
+  color: #fff;
+  animation: rotatesImg infinite 10s linear;
+  -webkit-animation: rotatesImg infinite 10s linear; /* Safari and Chrome */
+}
 
 /* 新样式 */
 .bgImgNew{
@@ -196,6 +205,7 @@ button[class="btn"]::after {
   position:fixed;
   bottom: 300rpx;
   right: 20rpx;
+  color: #fff;
   animation: rotates infinite 10s linear;
   -webkit-animation: rotates infinite 10s linear; /* Safari and Chrome */
 }
@@ -213,6 +223,22 @@ button[class="btn"]::after {
   }
   from {
     transform: rotate(0deg);
+  }
+}
+@keyframes rotatesImg {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotatesImg {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
   }
 }
  

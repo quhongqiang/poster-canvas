@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: '快来生成一个海报吧~',
+    motto: '点击我生成一个海报吧~',
     userInfo: {},
     hasUserInfo: false,
     mottoIs: false,

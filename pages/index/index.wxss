@@ -15,7 +15,20 @@
 .userinfo-nickname {
   color: #aaa;
 }
-
 .usermotto {
-  margin-top: 200px;
+  width: 100%;
+}
+.user-motto {
+  width: 60%;
+  height: 80rpx;
+  color: #fff;
+  margin: 200rpx auto;
+  line-height: 80rpx;
+  text-align: center;
+  display: block;
+  border-radius: 40rpx;
+  background-color: orange;
+  background:linear-gradient(90deg,rgba(255,226,0,1),rgba(255,200,11,1));
+  box-shadow: 0px 4px 8px 0px rgba(255,200,11,0.5); 
+
 }
