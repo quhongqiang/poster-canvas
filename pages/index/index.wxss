@@ -25,6 +25,7 @@
   margin: 200rpx auto;
   line-height: 80rpx;
   text-align: center;
+  font-size: 30rpx;
   display: block;
   border-radius: 40rpx;
   background-color: orange;

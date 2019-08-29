@@ -6,6 +6,7 @@ Page({
     userInfo: {}, //用户信息
     maskHidden: false,
     cardCode: "../../images/ewm.png",   //二维码
+    avatarUrl: '',
     taskCouponId:'',
     employeeId:'',
     currentTab: 0,
@@ -41,11 +42,24 @@ Page({
     this.data.employeeId = wx.getStorageSync('employeeId');
     this.data.taskCouponId = options.taskCouponId;
     this.defaultFirstShow();
+    
     //用户信息
     app.getUserInfo( userInfo => {
       this.setData({
-        userInfo: userInfo
+        userInfo: userInfo,
       })
+      wx.downloadFile({
+        url: userInfo.avatarUrl,
+        success: res => {
+          if (res.statusCode === 200) {
+            this.setData({
+              avatarUrl: res.tempFilePath
+            });
+          }
+        }, fail: res => {
+          console.log(res);
+        }
+      });
     })
   },
   onShow: function () {
@@ -84,20 +98,32 @@ Page({
     context.fillRect(0, 0, 375, 667)
     var path = that.data.cardImgSrc;
     var path1 = that.data.cardCode; // that.data.userInfo['avatarUrl'] 用户二维码
-    //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
-    //不知道是什么原因，手机环境能正常显示   //绘制二维码touxiang
+    var path2 = that.data.avatarUrl;
+
     context.drawImage(path, 48, 20, 280, 460);
     
-    context.drawImage(path1, 136, 520, 100, 100);
+    context.drawImage(path1, 230, 490, 100, 100);
     
-    //绘制领券标语
+    context.save()
+    context.beginPath()
+    context.arc(280, 541, 20, 0, 2*Math.PI)
+    context.clip()
+    context.drawImage(path2, 260, 522, 40, 40)
+    context.restore()
+
+    //绘制标语
     context.setFontSize(17);
-    context.setFillStyle('#333333');
-    context.setTextAlign('center');
-    context.fillText(that.data.userInfo['nickName'] + "邀请你进入海贼的世界", 185, 510);
+    context.setFillStyle('red');
+    context.fillText(that.data.userInfo['nickName'], 54, 530);
     context.stroke();
 
-    //绘制领码提醒
+    //绘制标语
+    context.setFontSize(16);
+    context.setFillStyle('#333333');
+    context.fillText("邀请你进入海贼的世界", 54, 560);
+    context.stroke();
+
+    //绘制提醒
     context.setFontSize(14);
     context.setFillStyle('#333333');
     context.setTextAlign('center');
@@ -122,6 +148,64 @@ Page({
       });
     }, 200);
   },
+  // createNewImg: function () {
+  //   var that = this;
+  //   const ctx = wx.createCanvasContext('mycanvas')
+  //   ctx.setFillStyle("#ffffff")
+  //   ctx.fillRect(0, 0, 375, 667)
+  //   var path = that.data.cardImgSrc;
+  //   var path1 = that.data.cardCode;
+  //   var path2 = that.data.userInfo['avatarUrl'];
+  //   wx.downloadFile({
+  //     url: path2,
+  //     success: function(res) {
+  //       ctx.drawImage(path, 48, 20, 280, 450);
+  //       ctx.drawImage(path1, 230, 490, 100, 100);
+  //       ctx.save()
+  //       ctx.beginPath()
+  //       ctx.arc(281, 541, 20, 0, 2*Math.PI)
+  //       ctx.clip()
+  //       ctx.drawImage(res.tempFilePath, 260, 522, 40, 40)
+  //       ctx.restore()
+  //       //绘制标语
+  //       ctx.setFontSize(17);
+  //       ctx.setFillStyle('red');
+  //       ctx.fillText(that.data.userInfo['nickName'], 54, 530);
+  //       ctx.stroke();
+
+  //       //绘制标语
+  //       ctx.setFontSize(16);
+  //       ctx.setFillStyle('#333333');
+  //       ctx.fillText("邀请你进入海贼的世界", 54, 560);
+  //       ctx.stroke();
+
+  //       //绘制提醒
+  //       ctx.setFontSize(14);
+  //       ctx.setFillStyle('#333333');
+  //       ctx.setTextAlign('center');
+  //       ctx.fillText('长按识别二维码', 185, 650);
+  //       ctx.stroke();
+  //       ctx.draw()
+
+  //       //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
+  //       setTimeout(function () {
+  //         wx.canvasToTempFilePath({
+  //           canvasId: 'mycanvas',
+  //           success: function (res) {
+  //             var tempFilePath = res.tempFilePath;
+  //             that.setData({
+  //               imagePath: tempFilePath,
+  //               canvasHidden: true
+  //             });
+  //           },
+  //           fail: function (res) {
+  //             console.log(res);
+  //           }
+  //         });
+  //       }, 200);
+  //     }
+  //   })
+  // },
   //点击保存到相册
   save: function () {
     var that = this

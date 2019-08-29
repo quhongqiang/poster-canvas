@@ -153,15 +153,15 @@ button[class="btn"]::after {
 .closeThis{
   width: 45rpx;
   height: 45rpx;
-  border-radius:50%;
+  border-radius: 50%;
   position: absolute;
   top: 38rpx;
-  right: 62rpx;
+  right: 78rpx;
   z-index: 1005;
 }
 .shengcheng{
-  width: 80%;
-  height: 80%;
+  width: 75vw;
+  height: 82vh;
   position: fixed;
   top: 50rpx;
   left: 0;
