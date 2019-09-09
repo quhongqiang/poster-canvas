@@ -63,7 +63,7 @@ Page({
     })
   },
   onShow: function () {
-    this.shakeFun()
+    // this.shakeFun()
   },
   //卡片默认显示第一张
   defaultFirstShow() {
@@ -297,35 +297,35 @@ Page({
     }
   },
   
-  shakeFun() { // 摇一摇方法封装
-    let _this = this;
-    var numX = 1 //x轴
-    var numY = 1 // y轴
-    var numZ = 0 // z轴
-    var stsw = true // 开关，保证在一定的时间内只能是一次，摇成功
-    var positivenum = 0 //正数 摇一摇总数
-    var audioCtx = wx.createAudioContext('myAudio') //音频，用于摇成功提示
-    wx.onAccelerometerChange(function (res) {
-      console.log(res)  //小程序api 加速度计
-      if (numX < res.x && numY < res.y) {  //个人看法，一次正数算摇一次，还有更复杂的
-        positivenum++
-        setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
-      }
-      if (numZ < res.z || numY < res.y) { //可以上下摇，上面的是左右摇
-        positivenum++
-        setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
-      }
-      if (positivenum == 2 && stsw) { //是否摇了指定的次数，执行成功后的操作
-        stsw = false
-        _this.formSubmit();
-        console.log('摇一摇成功')
-        setTimeout(() => {
-          positivenum = 0 // 摇一摇总数，重新0开始，计算
-          stsw = true
-        }, 2000)
-      } else {
-        console.log('没触发')
-      }
-    })
-  },
+  // shakeFun() { // 摇一摇方法封装
+  //   let _this = this;
+  //   var numX = 1 //x轴
+  //   var numY = 1 // y轴
+  //   var numZ = 0 // z轴
+  //   var stsw = true // 开关，保证在一定的时间内只能是一次，摇成功
+  //   var positivenum = 0 //正数 摇一摇总数
+  //   var audioCtx = wx.createAudioContext('myAudio') //音频，用于摇成功提示
+  //   wx.onAccelerometerChange(function (res) {
+  //     console.log(res)  //小程序api 加速度计
+  //     if (numX < res.x && numY < res.y) {  //个人看法，一次正数算摇一次，还有更复杂的
+  //       positivenum++
+  //       setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
+  //     }
+  //     if (numZ < res.z || numY < res.y) { //可以上下摇，上面的是左右摇
+  //       positivenum++
+  //       setTimeout(() => { positivenum = 0 }, 1000) //计时两秒内没有摇到指定次数，重新计算
+  //     }
+  //     if (positivenum == 2 && stsw) { //是否摇了指定的次数，执行成功后的操作
+  //       stsw = false
+  //       _this.formSubmit();
+  //       console.log('摇一摇成功')
+  //       setTimeout(() => {
+  //         positivenum = 0 // 摇一摇总数，重新0开始，计算
+  //         stsw = true
+  //       }, 2000)
+  //     } else {
+  //       console.log('没触发')
+  //     }
+  //   })
+  // },
 })
