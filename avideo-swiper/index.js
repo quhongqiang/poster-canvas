@@ -445,8 +445,8 @@ Component({
 			});
 		},
 		goBack() {
-			wx.navigateBack({
-				delta: 1
+			wx.navigateTo({
+				url: '../index/index'
 			})
 		}
 	}

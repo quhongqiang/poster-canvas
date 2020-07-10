@@ -39,7 +39,7 @@
   display: inline-block;
 }
 .btn{
-  width: 160rpx;
+  width: 160rpx!important;
   height: 88rpx;
   border-radius: 44rpx;
   background:linear-gradient(90deg,rgba(255,226,0,1),rgba(255,200,11,1));
@@ -84,7 +84,7 @@ button[class="btn"]::after {
 
 .zfbtn, .save{
   display: block;
-  width: 218rpx;
+  width: 218rpx!important;
 	height: 78rpx;
 	border-radius: 20rpx;
 	border: solid 1px #647adb;

@@ -10,7 +10,8 @@
           <view class="aswiper-item-panel" hidden="{{delayShowPanel && !player.scene}}">
             <view class="back">
               <button class="back-btn" plain="true" catch:tap="goBack">
-                <image class="back-img" src="./image/back.png" mode="aspectFit" />
+              <text class="color">首页</text>
+                <!-- <image class="back-img" src="./image/back.png" mode="aspectFit" /> -->
               </button>
             </view>
             <view class="content">

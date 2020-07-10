@@ -101,17 +101,19 @@
 	top: 34px;
 	left: 10px;
 	border: 0!important;
+	color: #fff;
 }
 .back-btn {
 	border: 0!important;
 	padding: 10rpx!important;
-	width: 78rpx!important;
+	width: 200rpx!important;
+	text-align: left;
+	color: #fff;
 }
-.back-img {
-	width: 38rpx;
-	height: 38rpx;
-	display: block;
+.color {
+	color: #fff;
 }
+
 .content {
 	width: 75%;
 	position: absolute;

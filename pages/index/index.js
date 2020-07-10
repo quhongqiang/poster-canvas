@@ -17,8 +17,8 @@ Page({
     })
   },
   bindVideoTap: function() {
-    wx.navigateTo({
-      url: '../video/index'
+    wx.navigateBack({
+      delta: 1
     })
   },
   onLoad: function () {
