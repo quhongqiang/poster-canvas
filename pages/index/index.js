@@ -16,6 +16,11 @@ Page({
       url: '../canvas/canvas'
     })
   },
+  bindVideoTap: function() {
+    wx.navigateTo({
+      url: '../video/index'
+    })
+  },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({

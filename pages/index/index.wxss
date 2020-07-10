@@ -17,12 +17,13 @@
 }
 .usermotto {
   width: 100%;
+  text-align: center;
 }
 .user-motto {
   width: 60%;
   height: 80rpx;
   color: #fff;
-  margin: 200rpx auto;
+  margin: 200rpx auto 40rpx;
   line-height: 80rpx;
   text-align: center;
   font-size: 30rpx;
@@ -31,5 +32,23 @@
   background-color: orange;
   background:linear-gradient(90deg,rgba(255,226,0,1),rgba(255,200,11,1));
   box-shadow: 0px 4px 8px 0px rgba(255,200,11,0.5); 
-
+}
+.demo {
+  width: 60%;
+  height: 80rpx;
+  color: #fff;
+  margin: 40rpx auto 40rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  display: block;
+  border-radius: 40rpx;
+  background-color: orange;
+  background:linear-gradient(90deg,rgba(255,226,0,1),rgba(255,200,11,1));
+  box-shadow: 0px 4px 8px 0px rgba(255,200,11,0.5); 
+}
+.txt {
+  width: 100%;
+  color: red;
+  margin: 0 auto;
 }

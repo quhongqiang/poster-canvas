@@ -1,13 +1,15 @@
 {
-  "pages": [
+  "pages":[
     "pages/index/index",
-    "pages/canvas/canvas"
+    "pages/canvas/canvas",
+    "pages/video/index"
   ],
-  "window": {
-    "backgroundTextStyle": "light",
+  "window":{
+    "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle":"white"
   },
+  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

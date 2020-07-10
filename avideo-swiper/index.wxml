@@ -1,0 +1,57 @@
+<wxs module="touch" src="./touch.wxs"></wxs>
+<view class="aswiper">
+  <view id="aswiper__track" class="aswiper__track" bind:touchstart="{{touch.touchstart}}" catch:touchmove="{{touch.touchmove}}" bind:touchend="{{touch.touchend}}" change:trackData="{{touch.trackDataObserver}}" trackData="{{trackData}}" bind:transitionend="{{touch.onTransitionEnd}}">
+    <view wx:for="{{players}}" wx:for-item="player" wx:for-index="idx" wx:key="id" class="aswiper-item aswiper-item--hidden">
+      <view class="aswiper-content">
+        <video id="{{player.id}}" class="aswiper-item-video" data-player-idx="{{idx}}" src="{{player.src}}" loop="{{loop}}" autoplay="{{false}}" object-fit="{{objectFit}}" enable-play-gesture="{{false}}" enable-progress-gesture="{{false}}" show-center-play-btn="{{false}}" show-progress="{{false}}" controls="{{false}}" bindplay="onPlay" bindpause="onPause" bindended="onEnded" binderror="onError" bindtimeupdate="onTimeUpdate" bindwaiting="onWaiting" bindprogress="onProgress" bindloadedmetadata="onLoadedMetaData"></video>
+        <!-- <image hidden="{{player.scene && player.src}}" class="video-poster" src="{{player.poster}}" mode="aspectFill" /> -->
+        
+        <view class="video-overlay" data-player-idx="{{idx}}" bind:tap="onVideoOverlayTap">
+          <view class="aswiper-item-panel" hidden="{{delayShowPanel && !player.scene}}">
+            <view class="back">
+              <button class="back-btn" plain="true" catch:tap="goBack">
+                <image class="back-img" src="./image/back.png" mode="aspectFit" />
+              </button>
+            </view>
+            <view class="content">
+              <view class="content-top">
+                <button class="avatar" plain="true" catch:tap="onAvatarTap">
+                  <image class="avatar-img" src="{{player.avatar}}" mode="aspectFit" />
+                </button>
+                <text>{{player.name}}</text>
+              </view>
+              <text class="content-bottom">
+                {{player.txt}}
+              </text>
+            </view>
+            
+            <view class="panel">
+              <button class="forward-btn forward-btn1" plain="true" catch:tap="onShareTap">
+                <image class="forward-btn-img forward-btn-img1" src="./image/wechat.png" />
+                <text class="text">{{player.fx}}</text>
+              </button>
+            </view>
+            <view class="panel">
+              <button wx:if="{{isCollect}}" class="forward-btn forward-btn2" plain="true" catch:tap="onNoCollectTap">
+                <image class="forward-btn-img" src="./image/yes-collect.png" />
+                <text class="text">{{player.collect}}</text>
+              </button>
+              <button wx:else class="forward-btn forward-btn2" plain="true" catch:tap="onYesCollectTap">
+                <image class="forward-btn-img" src="./image/no-collect.png" />
+                <text class="text">{{player.collect}}</text>
+              </button>
+            </view>
+            <view class="panel">
+              <button class="forward-btn forward-btn3" plain="true" catch:tap="onForwardTap">
+                <image class="forward-btn-img" src="./image/forward.png" />
+                <text class="text">{{player.forward}}</text>
+              </button>
+            </view>
+          </view>
+          <image hidden="{{!player.scene || player.status !== 2}}" data-player-idx="{{idx}}" class="video-play-btn" src="./image/play-btn.png" mode="aspectFit" catch:tap="onVideoPlayBtnTap" />
+        </view>
+      </view>
+      <view class="aswiper-content__overlay"></view>
+    </view>
+  </view>
+</view>

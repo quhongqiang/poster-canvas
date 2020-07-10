@@ -1,4 +1,3 @@
-![效果图](https://github.com/quhongqiang/poster-canvas/blob/master/images/canvas.gif?raw=true)
 
 ### 描述
 
@@ -6,3 +5,6 @@
 
 添加了`分享到微信好友，摇一摇生成海报、保存到本地、选取本地相册、拍照等功能`。
 
+新增了仿快手视频的简单制作 
+
+搜索     曲小强的摸鱼号  查看效果
