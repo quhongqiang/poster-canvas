@@ -1,0 +1,12 @@
+/**index.wxss**/
+.food-name {
+  margin: 50rpx;
+  text-align: center;
+}
+.text {
+  width: 200rpx;
+  color: red;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+}

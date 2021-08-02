@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="food-name">
+    <text>今天吃</text>
+    <text class="text">{{eatFood}}</text>
+  </view>
+  <button wx:if="{{!isStart }}" bindtap="bindStart"> 开始 </button>
+  <button wx:else bindtap="bindEnd"> 停止 </button>
+  <view style="margin: 50rpx;">
+    <official-account>我我我我</official-account>
+  </view>
+</view>

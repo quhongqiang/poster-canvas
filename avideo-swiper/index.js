@@ -35,6 +35,10 @@ Component({
 		height: {
 			type: Number,
 			value: 0
+		},
+		deviceInfo: {
+			type: Number,
+			value: 0
 		}
 	},
 	data: {
@@ -445,8 +449,8 @@ Component({
 			});
 		},
 		goBack() {
-			wx.navigateTo({
-				url: '../index/index'
+			wx.navigateBack({
+				delta: 1
 			})
 		}
 	}

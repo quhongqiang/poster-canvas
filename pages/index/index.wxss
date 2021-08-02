@@ -23,7 +23,7 @@
   width: 60%;
   height: 80rpx;
   color: #fff;
-  margin: 200rpx auto 40rpx;
+  margin: auto;
   line-height: 80rpx;
   text-align: center;
   font-size: 30rpx;

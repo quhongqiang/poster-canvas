@@ -47,6 +47,7 @@ Page({
     app.getUserInfo( userInfo => {
       this.setData({
         userInfo: userInfo,
+        avatarUrl: userInfo.avatarUrl
       })
       wx.downloadFile({
         url: userInfo.avatarUrl,
@@ -99,6 +100,9 @@ Page({
     var path = that.data.cardImgSrc;
     var path1 = that.data.cardCode; // that.data.userInfo['avatarUrl'] 用户二维码
     var path2 = that.data.avatarUrl;
+
+    console.log(path2)
+
 
     context.drawImage(path, 48, 20, 280, 460);
     

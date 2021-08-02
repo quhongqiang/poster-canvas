@@ -98,21 +98,27 @@
 }
 .back {
 	position: absolute;
-	top: 34px;
+	top: 0;
 	left: 10px;
 	border: 0!important;
 	color: #fff;
+	z-index: 1111;
+	height: 86rpx;
+  display: flex;
+  align-items: center;
 }
 .back-btn {
 	border: 0!important;
-	padding: 10rpx!important;
 	width: 200rpx!important;
+	height: 40rpx;
 	text-align: left;
-	color: #fff;
+	padding: 0;
 }
-.color {
-	color: #fff;
+.back-img {
+	width: 40rpx;
+	height: 40rpx;
 }
+
 
 .content {
 	width: 75%;

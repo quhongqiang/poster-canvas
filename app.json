@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/video/index",
     "pages/canvas/canvas",
-    "pages/index/index"
+    "pages/eat/eat"
   ],
   "window":{
     "backgroundTextStyle":"light",

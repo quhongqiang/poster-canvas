@@ -1,5 +1,10 @@
 <wxs module="touch" src="./touch.wxs"></wxs>
 <view class="aswiper">
+  <view class="back" style="padding-top: {{deviceInfo}}px">
+    <button class="back-btn" plain="true" catch:tap="goBack">
+      <image class="back-img" src="https://static-mumway.oss-cn-zhangjiakou.aliyuncs.com/NetworkFrontEnd/qhq/jlxq/goback.png" mode="aspectFit" />
+    </button>
+  </view>
   <view id="aswiper__track" class="aswiper__track" bind:touchstart="{{touch.touchstart}}" catch:touchmove="{{touch.touchmove}}" bind:touchend="{{touch.touchend}}" change:trackData="{{touch.trackDataObserver}}" trackData="{{trackData}}" bind:transitionend="{{touch.onTransitionEnd}}">
     <view wx:for="{{players}}" wx:for-item="player" wx:for-index="idx" wx:key="id" class="aswiper-item aswiper-item--hidden">
       <view class="aswiper-content">
@@ -8,12 +13,6 @@
         
         <view class="video-overlay" data-player-idx="{{idx}}" bind:tap="onVideoOverlayTap">
           <view class="aswiper-item-panel" hidden="{{delayShowPanel && !player.scene}}">
-            <view class="back">
-              <button class="back-btn" plain="true" catch:tap="goBack">
-              <text class="color">首页</text>
-                <!-- <image class="back-img" src="./image/back.png" mode="aspectFit" /> -->
-              </button>
-            </view>
             <view class="content">
               <view class="content-top">
                 <button class="avatar" plain="true" catch:tap="onAvatarTap">

@@ -145,7 +145,8 @@ Page({
 	data: {
 		videos: videoList,
 		videoIndex: 0,
-		duration: 500
+		duration: 500,
+		deviceInfo: 0
 	},
 	onLoad: function() {
 		// const videos = videoList;
@@ -154,6 +155,7 @@ Page({
 		// 		videos
 		// 	});
 		// }, 1000);
+		this.getDeviceInfo()
 	},
 	onChange(e) {
 		// console.log('change', e.detail.video);
@@ -161,4 +163,11 @@ Page({
 	onPlay(e) {
 		// console.log('play', e.detail.video);
 	},
+	async getDeviceInfo() {
+		let deviceInfo = await wx.getSystemInfo()
+		console.log(deviceInfo, 'deviceInfo')
+		this.setData({
+			deviceInfo: deviceInfo.statusBarHeight
+		})
+	}
 });
